@@ -1,0 +1,42 @@
+From 5e4e45ed6dda1004675a584e5813050866431a9b Mon Sep 17 00:00:00 2001
+From: Ron <rumbletumjum@gmail.com>
+Date: Sat, 8 May 2021 21:16:31 -0400
+Subject: [PATCH] unfuck tabs
+
+---
+ XMonad/Hooks/ManageDocks.hs | 2 +-
+ XMonad/Layout/Decoration.hs | 4 ----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/XMonad/Hooks/ManageDocks.hs b/XMonad/Hooks/ManageDocks.hs
+index 69a1dac6..b13265db 100644
+--- a/XMonad/Hooks/ManageDocks.hs
++++ b/XMonad/Hooks/ManageDocks.hs
+@@ -130,7 +130,7 @@ maybeInitStrutCache = maybe (queryDocks >>= foldlM (flip updateStrut) M.empty) p
+ 
+ updateStrut :: Window -> WindowStruts -> X WindowStruts
+ updateStrut w cache = do
+-    when (w `M.notMember` cache) $ requestDockEvents w
++    -- when (w `M.notMember` cache) $ requestDockEvents w
+     strut <- getStrut w
+     pure $ M.insert w strut cache
+ 
+diff --git a/XMonad/Layout/Decoration.hs b/XMonad/Layout/Decoration.hs
+index cacc3a71..4fad7229 100644
+--- a/XMonad/Layout/Decoration.hs
++++ b/XMonad/Layout/Decoration.hs
+@@ -110,11 +110,7 @@ instance Default Theme where
+           , activeTextColor     = "#FFFFFF"
+           , inactiveTextColor   = "#BFBFBF"
+           , urgentTextColor     = "#FF0000"
+-#ifdef XFT
+-          , fontName            = "xft:monospace"
+-#else
+           , fontName            = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
+-#endif
+           , decoWidth           = 200
+           , decoHeight          = 20
+           , windowTitleAddons   = []
+-- 
+2.31.1
+

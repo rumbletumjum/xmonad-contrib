@@ -127,7 +127,7 @@ maybeInitStrutCache = maybe (queryDocks >>= foldlM (flip updateStrut) M.empty) p
 
 updateStrut :: Window -> WindowStruts -> X WindowStruts
 updateStrut w cache = do
-    when (w `M.notMember` cache) $ requestDockEvents w
+    -- when (w `M.notMember` cache) $ requestDockEvents w
     strut <- getStrut w
     pure $ M.insert w strut cache
 
